@@ -44,11 +44,18 @@
       align-items: center;
       padding: 14px 0;
       gap: 16px;
+      flex-wrap: wrap;
     }
     .brand {
       font-size: 1.1rem;
       font-weight: 700;
       letter-spacing: 0.3px;
+    }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
     }
     .nav-links {
       display: flex;
@@ -56,6 +63,24 @@
       color: var(--muted);
       font-size: 0.95rem;
       flex-wrap: wrap;
+    }
+    .lang-switch {
+      display: flex;
+      gap: 8px;
+    }
+    .lang-btn {
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .lang-btn.active {
+      background: var(--accent);
+      color: #052e16;
+      border-color: transparent;
     }
     .hero {
       padding: 72px 0 48px;
@@ -192,6 +217,7 @@
       color: var(--muted);
       font-size: 0.95rem;
     }
+    .hidden { display: none; }
     @media (max-width: 900px) {
       .hero, .two-col, .grid {
         grid-template-columns: 1fr;
@@ -201,115 +227,191 @@
       }
     }
   </style>
+  <script>
+    function setLang(lang) {
+      const es = document.getElementById('lang-es');
+      const en = document.getElementById('lang-en');
+      const btnEs = document.getElementById('btn-es');
+      const btnEn = document.getElementById('btn-en');
+      if (lang === 'es') {
+        es.classList.remove('hidden');
+        en.classList.add('hidden');
+        btnEs.classList.add('active');
+        btnEn.classList.remove('active');
+        document.documentElement.lang = 'es';
+      } else {
+        en.classList.remove('hidden');
+        es.classList.add('hidden');
+        btnEn.classList.add('active');
+        btnEs.classList.remove('active');
+        document.documentElement.lang = 'en';
+      }
+    }
+  </script>
 </head>
 <body>
   <header>
     <div class="container nav">
       <div class="brand">Islam Study AI</div>
-      <nav class="nav-links">
-        <a href="#funciones">Funciones</a>
-        <a href="#premium">Premium</a>
-        <a href="#contacto">Contacto</a>
-        <a href="privacy.html">Privacidad</a>
-      </nav>
+      <div class="nav-right">
+        <nav class="nav-links">
+          <a href="#funciones">Funciones / Features</a>
+          <a href="#premium">Premium</a>
+          <a href="#contacto">Contacto / Contact</a>
+          <a href="privacy.html">Privacidad / Privacy</a>
+        </nav>
+        <div class="lang-switch">
+          <button id="btn-es" class="lang-btn active" onclick="setLang('es')">ES</button>
+          <button id="btn-en" class="lang-btn" onclick="setLang('en')">EN</button>
+        </div>
+      </div>
     </div>
   </header>
 
   <main>
-    <section class="container hero">
-      <div>
-        <div class="badge">Estudio del Corán con IA</div>
-        <h1>Leé, buscá y estudiá el Corán en una sola app</h1>
-        <p class="lead">
-          Islam Study AI combina lectura del Corán, búsqueda de versículos, tafsir, hadices y herramientas con inteligencia artificial para ayudarte a estudiar de forma simple, moderna y organizada.
-        </p>
-        <div class="cta">
-          <a class="btn btn-primary" href="#contacto">Contacto</a>
-          <a class="btn btn-secondary" href="privacy.html">Política de privacidad</a>
+    <div id="lang-es">
+      <section class="container hero">
+        <div>
+          <div class="badge">Estudio del Corán con IA</div>
+          <h1>Leé, buscá y estudiá el Corán en una sola app</h1>
+          <p class="lead">
+            Islam Study AI combina lectura del Corán, búsqueda de versículos, tafsir, hadices y herramientas con inteligencia artificial para ayudarte a estudiar de forma simple, moderna y organizada.
+          </p>
+          <div class="cta">
+            <a class="btn btn-primary" href="#contacto">Contacto</a>
+            <a class="btn btn-secondary" href="privacy.html">Política de privacidad</a>
+          </div>
+          <div class="lang-note">Disponible en español e inglés.</div>
         </div>
-        <div class="lang-note">Disponible en español e inglés.</div>
-      </div>
 
-      <div class="hero-card">
-        <div class="preview">
-          <h3>Funciones principales</h3>
-          <p>Lectura del Corán, audio, tafsir de Ibn Kathir, búsqueda inteligente, chat IA, guías de estudio, quizzes y colecciones de hadices.</p>
-          <div class="pill-list">
-            <span class="pill">114 suras</span>
-            <span class="pill">Árabe + traducción</span>
-            <span class="pill">Tafsir</span>
-            <span class="pill">Hadices</span>
-            <span class="pill">Chat IA</span>
-            <span class="pill">Quizzes</span>
+        <div class="hero-card">
+          <div class="preview">
+            <h3>Funciones principales</h3>
+            <p>Lectura del Corán, audio, tafsir de Ibn Kathir, búsqueda inteligente, chat IA, guías de estudio, quizzes y colecciones de hadices.</p>
+            <div class="pill-list">
+              <span class="pill">114 suras</span>
+              <span class="pill">Árabe + traducción</span>
+              <span class="pill">Tafsir</span>
+              <span class="pill">Hadices</span>
+              <span class="pill">Chat IA</span>
+              <span class="pill">Quizzes</span>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="funciones" class="container">
-      <h2 class="section-title">Qué podés hacer</h2>
-      <p class="section-copy">
-        La app está pensada para lectura, consulta y estudio. Algunas funciones son libres y otras requieren iniciar sesión.
-      </p>
-      <div class="grid">
-        <article class="card">
-          <h3>Lectura del Corán</h3>
-          <p>Accedé a las 114 suras con texto en árabe, traducción y navegación simple por versículos.</p>
-        </article>
-        <article class="card">
-          <h3>Audio y recitadores</h3>
-          <p>Escuchá recitaciones versículo por versículo y elegí entre distintos recitadores.</p>
-        </article>
-        <article class="card">
-          <h3>Tafsir</h3>
-          <p>Consultá la explicación clásica de Ibn Kathir para entender mejor el significado de cada versículo.</p>
-        </article>
-        <article class="card">
-          <h3>Búsqueda</h3>
-          <p>Encontrá versículos por palabra o frase y accedé directamente al resultado dentro del lector.</p>
-        </article>
-        <article class="card">
-          <h3>Chat IA</h3>
-          <p>Hacé preguntas sobre el Corán y recibí respuestas con referencias a versículos relacionados.</p>
-        </article>
-        <article class="card">
-          <h3>Guías y quizzes</h3>
-          <p>Generá guías de estudio y cuestionarios para profundizar y repasar cada sura.</p>
-        </article>
-      </div>
-    </section>
+      <section id="funciones" class="container">
+        <h2 class="section-title">Qué podés hacer</h2>
+        <p class="section-copy">
+          La app está pensada para lectura, consulta y estudio. Algunas funciones son libres y otras requieren iniciar sesión.
+        </p>
+        <div class="grid">
+          <article class="card"><h3>Lectura del Corán</h3><p>Accedé a las 114 suras con texto en árabe, traducción y navegación simple por versículos.</p></article>
+          <article class="card"><h3>Audio y recitadores</h3><p>Escuchá recitaciones versículo por versículo y elegí entre distintos recitadores.</p></article>
+          <article class="card"><h3>Tafsir</h3><p>Consultá la explicación clásica de Ibn Kathir para entender mejor el significado de cada versículo.</p></article>
+          <article class="card"><h3>Búsqueda</h3><p>Encontrá versículos por palabra o frase y accedé directamente al resultado dentro del lector.</p></article>
+          <article class="card"><h3>Chat IA</h3><p>Hacé preguntas sobre el Corán y recibí respuestas con referencias a versículos relacionados.</p></article>
+          <article class="card"><h3>Guías y quizzes</h3><p>Generá guías de estudio y cuestionarios para profundizar y repasar cada sura.</p></article>
+        </div>
+      </section>
 
-    <section id="premium" class="container">
-      <div class="two-col">
-        <article class="card">
-          <h2 class="section-title" style="font-size:1.5rem; margin-bottom:10px;">Funciones gratuitas</h2>
-          <p class="section-copy" style="margin-bottom:0; max-width:none;">
-            Lectura del Corán, búsqueda de versículos y consulta de hadices sin necesidad de cuenta.
+      <section id="premium" class="container">
+        <div class="two-col">
+          <article class="card">
+            <h2 class="section-title" style="font-size:1.5rem; margin-bottom:10px;">Funciones gratuitas</h2>
+            <p class="section-copy" style="margin-bottom:0; max-width:none;">Lectura del Corán, búsqueda de versículos y consulta de hadices sin necesidad de cuenta.</p>
+          </article>
+          <article class="card">
+            <h2 class="section-title" style="font-size:1.5rem; margin-bottom:10px;">Premium</h2>
+            <p class="section-copy" style="margin-bottom:0; max-width:none;">Los usuarios premium acceden sin límites diarios a las funciones de IA, como chat, guías de estudio y quizzes.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="contacto" class="container">
+        <div class="card">
+          <h2 class="section-title">Contacto</h2>
+          <p class="section-copy">Para soporte o consultas sobre la aplicación, podés escribir a:</p>
+          <p><strong>Email:</strong> support@islamstudyai.com</p>
+          <p class="lang-note">Reemplazá este email por el que vayas a usar en Google Play.</p>
+        </div>
+      </section>
+    </div>
+
+    <div id="lang-en" class="hidden">
+      <section class="container hero">
+        <div>
+          <div class="badge">Quran study with AI</div>
+          <h1>Read, search, and study the Quran in one app</h1>
+          <p class="lead">
+            Islam Study AI combines Quran reading, verse search, tafsir, hadith collections, and artificial intelligence tools to help you study in a simple, modern, and organized way.
           </p>
-        </article>
-        <article class="card">
-          <h2 class="section-title" style="font-size:1.5rem; margin-bottom:10px;">Premium</h2>
-          <p class="section-copy" style="margin-bottom:0; max-width:none;">
-            Los usuarios premium acceden sin límites diarios a las funciones de IA, como chat, guías de estudio y quizzes.
-          </p>
-        </article>
-      </div>
-    </section>
+          <div class="cta">
+            <a class="btn btn-primary" href="#contacto">Contact</a>
+            <a class="btn btn-secondary" href="privacy.html">Privacy Policy</a>
+          </div>
+          <div class="lang-note">Available in English and Spanish.</div>
+        </div>
 
-    <section id="contacto" class="container">
-      <div class="card">
-        <h2 class="section-title">Contacto</h2>
-        <p class="section-copy">Para soporte o consultas sobre la aplicación, podés escribir a:</p>
-        <p><strong>Email:</strong> francisco.arcebenaglia@gmail.com</p>
-        <p class="lang-note">Reemplazá este email por el que vayas a usar en Google Play.</p>
-      </div>
-    </section>
+        <div class="hero-card">
+          <div class="preview">
+            <h3>Main features</h3>
+            <p>Quran reading, audio recitation, Ibn Kathir tafsir, smart search, AI chat, study guides, quizzes, and hadith collections.</p>
+            <div class="pill-list">
+              <span class="pill">114 surahs</span>
+              <span class="pill">Arabic + translation</span>
+              <span class="pill">Tafsir</span>
+              <span class="pill">Hadith</span>
+              <span class="pill">AI Chat</span>
+              <span class="pill">Quizzes</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="container">
+        <h2 class="section-title">What you can do</h2>
+        <p class="section-copy">
+          The app is built for reading, reference, and study. Some features are free, while others require an account.
+        </p>
+        <div class="grid">
+          <article class="card"><h3>Quran Reading</h3><p>Access all 114 surahs with Arabic text, translation, and smooth verse-by-verse navigation.</p></article>
+          <article class="card"><h3>Audio & Reciters</h3><p>Listen to verse recitations and choose from different reciters.</p></article>
+          <article class="card"><h3>Tafsir</h3><p>Read classical Ibn Kathir tafsir for deeper understanding of each verse.</p></article>
+          <article class="card"><h3>Search</h3><p>Find verses by word or phrase and jump directly to the result in the reader.</p></article>
+          <article class="card"><h3>AI Chat</h3><p>Ask questions about the Quran and get answers with related verse references.</p></article>
+          <article class="card"><h3>Study Guides & Quizzes</h3><p>Generate study guides and quizzes to deepen learning and review each surah.</p></article>
+        </div>
+      </section>
+
+      <section class="container">
+        <div class="two-col">
+          <article class="card">
+            <h2 class="section-title" style="font-size:1.5rem; margin-bottom:10px;">Free Features</h2>
+            <p class="section-copy" style="margin-bottom:0; max-width:none;">Quran reading, verse search, and hadith browsing without creating an account.</p>
+          </article>
+          <article class="card">
+            <h2 class="section-title" style="font-size:1.5rem; margin-bottom:10px;">Premium</h2>
+            <p class="section-copy" style="margin-bottom:0; max-width:none;">Premium users get unlimited daily access to AI features such as chat, study guides, and quizzes.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="contact" class="container">
+        <div class="card">
+          <h2 class="section-title">Contact</h2>
+          <p class="section-copy">For support or questions about the app, you can reach us at:</p>
+          <p><strong>Email:</strong> francisco.arcebenaglia@gmail.com</p>
+          <p class="lang-note">Replace this email with the one you will use in Google Play.</p>
+        </div>
+      </section>
+    </div>
   </main>
 
   <footer>
     <div class="container">
       <div><strong>Islam Study AI</strong></div>
-      <div>Aplicación móvil para estudiar el Corán con herramientas de lectura, búsqueda y asistencia con IA.</div>
+      <div>Mobile app for studying the Quran with reading, search, and AI-assisted learning tools.</div>
     </div>
   </footer>
 </body>
