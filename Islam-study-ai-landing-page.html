@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Islam Study AI</title>
+  <meta name="description" content="Islam Study AI es una app para estudiar el Corán con lectura, búsqueda, tafsir, hadices y herramientas con IA." />
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #111827;
+      --soft: #1f2937;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --accent: #22c55e;
+      --accent-2: #16a34a;
+      --border: rgba(255,255,255,0.08);
+      --max: 1080px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #0b1220 0%, #0f172a 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container {
+      width: min(100% - 32px, var(--max));
+      margin: 0 auto;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(10px);
+      background: rgba(15, 23, 42, 0.85);
+      border-bottom: 1px solid var(--border);
+      z-index: 10;
+    }
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 0;
+      gap: 16px;
+    }
+    .brand {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      flex-wrap: wrap;
+    }
+    .hero {
+      padding: 72px 0 48px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 28px;
+      align-items: center;
+    }
+    .badge {
+      display: inline-block;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(34,197,94,0.1);
+      color: #bbf7d0;
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-size: clamp(2rem, 4vw, 3.6rem);
+      line-height: 1.1;
+      margin: 0 0 14px;
+    }
+    .lead {
+      color: var(--muted);
+      font-size: 1.06rem;
+      max-width: 720px;
+      margin-bottom: 24px;
+    }
+    .cta {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+    .btn {
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-weight: 700;
+      border: 1px solid var(--border);
+      display: inline-block;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #052e16;
+      border-color: transparent;
+    }
+    .btn-primary:hover { background: var(--accent-2); }
+    .btn-secondary {
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+    }
+    .hero-card, .card {
+      background: rgba(17, 24, 39, 0.9);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+    }
+    .hero-card {
+      padding: 22px;
+    }
+    .preview {
+      background: linear-gradient(180deg, rgba(34,197,94,0.12), rgba(255,255,255,0.02));
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+    }
+    .preview h3 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+    }
+    .preview p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .pill {
+      font-size: 0.88rem;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+    section {
+      padding: 20px 0 56px;
+    }
+    .section-title {
+      font-size: 1.8rem;
+      margin: 0 0 10px;
+    }
+    .section-copy {
+      color: var(--muted);
+      max-width: 760px;
+      margin-bottom: 24px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .card {
+      padding: 20px;
+    }
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 8px;
+      font-size: 1.05rem;
+    }
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 0 50px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .lang-note {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    @media (max-width: 900px) {
+      .hero, .two-col, .grid {
+        grid-template-columns: 1fr;
+      }
+      .hero {
+        padding-top: 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">Islam Study AI</div>
+      <nav class="nav-links">
+        <a href="#funciones">Funciones</a>
+        <a href="#premium">Premium</a>
+        <a href="#contacto">Contacto</a>
+        <a href="privacy.html">Privacidad</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="container hero">
+      <div>
+        <div class="badge">Estudio del Corán con IA</div>
+        <h1>Leé, buscá y estudiá el Corán en una sola app</h1>
+        <p class="lead">
+          Islam Study AI combina lectura del Corán, búsqueda de versículos, tafsir, hadices y herramientas con inteligencia artificial para ayudarte a estudiar de forma simple, moderna y organizada.
+        </p>
+        <div class="cta">
+          <a class="btn btn-primary" href="#contacto">Contacto</a>
+          <a class="btn btn-secondary" href="privacy.html">Política de privacidad</a>
+        </div>
+        <div class="lang-note">Disponible en español e inglés.</div>
+      </div>
+
+      <div class="hero-card">
+        <div class="preview">
+          <h3>Funciones principales</h3>
+          <p>Lectura del Corán, audio, tafsir de Ibn Kathir, búsqueda inteligente, chat IA, guías de estudio, quizzes y colecciones de hadices.</p>
+          <div class="pill-list">
+            <span class="pill">114 suras</span>
+            <span class="pill">Árabe + traducción</span>
+            <span class="pill">Tafsir</span>
+            <span class="pill">Hadices</span>
+            <span class="pill">Chat IA</span>
+            <span class="pill">Quizzes</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="funciones" class="container">
+      <h2 class="section-title">Qué podés hacer</h2>
+      <p class="section-copy">
+        La app está pensada para lectura, consulta y estudio. Algunas funciones son libres y otras requieren iniciar sesión.
+      </p>
+      <div class="grid">
+        <article class="card">
+          <h3>Lectura del Corán</h3>
+          <p>Accedé a las 114 suras con texto en árabe, traducción y navegación simple por versículos.</p>
+        </article>
+        <article class="card">
+          <h3>Audio y recitadores</h3>
+          <p>Escuchá recitaciones versículo por versículo y elegí entre distintos recitadores.</p>
+        </article>
+        <article class="card">
+          <h3>Tafsir</h3>
+          <p>Consultá la explicación clásica de Ibn Kathir para entender mejor el significado de cada versículo.</p>
+        </article>
+        <article class="card">
+          <h3>Búsqueda</h3>
+          <p>Encontrá versículos por palabra o frase y accedé directamente al resultado dentro del lector.</p>
+        </article>
+        <article class="card">
+          <h3>Chat IA</h3>
+          <p>Hacé preguntas sobre el Corán y recibí respuestas con referencias a versículos relacionados.</p>
+        </article>
+        <article class="card">
+          <h3>Guías y quizzes</h3>
+          <p>Generá guías de estudio y cuestionarios para profundizar y repasar cada sura.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="premium" class="container">
+      <div class="two-col">
+        <article class="card">
+          <h2 class="section-title" style="font-size:1.5rem; margin-bottom:10px;">Funciones gratuitas</h2>
+          <p class="section-copy" style="margin-bottom:0; max-width:none;">
+            Lectura del Corán, búsqueda de versículos y consulta de hadices sin necesidad de cuenta.
+          </p>
+        </article>
+        <article class="card">
+          <h2 class="section-title" style="font-size:1.5rem; margin-bottom:10px;">Premium</h2>
+          <p class="section-copy" style="margin-bottom:0; max-width:none;">
+            Los usuarios premium acceden sin límites diarios a las funciones de IA, como chat, guías de estudio y quizzes.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="contacto" class="container">
+      <div class="card">
+        <h2 class="section-title">Contacto</h2>
+        <p class="section-copy">Para soporte o consultas sobre la aplicación, podés escribir a:</p>
+        <p><strong>Email:</strong> francisco.arcebenaglia@gmail.com</p>
+        <p class="lang-note">Reemplazá este email por el que vayas a usar en Google Play.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div><strong>Islam Study AI</strong></div>
+      <div>Aplicación móvil para estudiar el Corán con herramientas de lectura, búsqueda y asistencia con IA.</div>
+    </div>
+  </footer>
+</body>
+</html>
