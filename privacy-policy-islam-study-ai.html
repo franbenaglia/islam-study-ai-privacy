@@ -1,39 +1,81 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Privacy Policy / Política de Privacidad - Islam Study AI</title>
+
 <style>
-body {font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 20px; max-width: 900px; margin:auto; color:#111;}
-h1,h2 {color:#0f172a;}
-p {margin-bottom: 12px;}
-ul {margin-bottom: 16px;}
-.lang-switch {margin-bottom:20px;}
-button {padding:8px 12px; margin-right:10px; cursor:pointer; border:none; border-radius:6px;}
-.active {background:#0f172a; color:#fff;}
-.hidden {display:none;}
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 20px;
+  max-width: 900px;
+  margin: auto;
+  color: #111;
+}
+
+h1, h2 {
+  color: #0f172a;
+}
+
+p {
+  margin-bottom: 12px;
+}
+
+ul {
+  margin-bottom: 16px;
+}
+
+.lang-switch {
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 8px 12px;
+  margin-right: 10px;
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+}
+
+.active {
+  background: #0f172a;
+  color: #fff;
+}
+
+.hidden {
+  display: none;
+}
 </style>
+
 <script>
-function setLang(lang){
+function setLang(lang) {
   document.getElementById('es').classList.add('hidden');
   document.getElementById('en').classList.add('hidden');
+
   document.getElementById(lang).classList.remove('hidden');
+
   document.getElementById('btn-es').classList.remove('active');
   document.getElementById('btn-en').classList.remove('active');
-  document.getElementById('btn-'+lang).classList.add('active');
+
+  document.getElementById('btn-' + lang).classList.add('active');
+
+  document.documentElement.lang = lang;
 }
 </script>
 </head>
+
 <body>
 
 <div class="lang-switch">
-  <button id="btn-es" class="active" onclick="setLang('es')">Español</button>
-  <button id="btn-en" onclick="setLang('en')">English</button>
+  <button id="btn-es" onclick="setLang('es')">Español</button>
+  <button id="btn-en" class="active" onclick="setLang('en')">English</button>
 </div>
 
 <!-- ESPAÑOL -->
-<div id="es">
+<div id="es" class="hidden">
 <h1>Política de Privacidad</h1>
 <p>Última actualización: 2026</p>
 
@@ -75,7 +117,7 @@ function setLang(lang){
 </div>
 
 <!-- ENGLISH -->
-<div id="en" class="hidden">
+<div id="en">
 <h1>Privacy Policy</h1>
 <p>Last updated: 2026</p>
 
@@ -98,7 +140,7 @@ function setLang(lang){
 
 <h2>3. Data sharing</h2>
 <ul>
-<li>Google (login & billing)</li>
+<li>Google (login &amp; billing)</li>
 <li>RevenueCat</li>
 <li>Backend providers</li>
 </ul>
